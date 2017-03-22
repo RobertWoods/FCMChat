@@ -9,6 +9,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 
 /**
@@ -19,24 +20,24 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public static final String INTENT_EXTRA = "d00d";
     public static final String INTENT_FILTER = "edu.temple.FCMChat.RECEIVED_MESSAGE";
     public static final String FILENAME = "o3o.messages";
+    private static final String LOG = "FMS";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage){
-        String message = remoteMessage.getNotification().getBody() + " " + timestamp() + "\n";
-        Log.d("Firebase", message);
+        String message = remoteMessage.getNotification().getBody() +
+                " " + Calendar.getInstance().getTime().toString();
+        Log.d(LOG, message);
         FileOutputStream stream;
         try{
             stream = openFileOutput(FILENAME, Context.MODE_APPEND);
-            stream.write((message).getBytes());
+            stream.write((message+"\n").getBytes());
             stream.close();
-        } catch (Exception e){}
+        } catch (IOException e){
+            Log.d(LOG, "Failed to write to file");
+        }
         Intent intent = new Intent(INTENT_FILTER);
         intent.putExtra(INTENT_EXTRA, message);
         sendBroadcast(intent);
     }
 
-    private String timestamp() {
-        return Calendar.getInstance().getTime().toString();
-
-    }
 }

@@ -13,12 +13,14 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> messages = new ArrayList<>();
     LinearLayout linearLayout;
+    private static final String LOG = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,13 @@ public class MainActivity extends AppCompatActivity {
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                //if(intent.getAction()==) TODO: test for specific intent later
                 String message = intent.getStringExtra(MyFirebaseMessagingService.INTENT_EXTRA);
-                if(message != null) {
+                if (message != null) {
                     messages.add(message);
                     addMessageToLayout(message);
-                    Log.d("Firebase", "Message received in intent: " + message);
+                    Log.d(LOG, "Message received in intent: " + message);
                 } else {
-                    Log.d("Firebase", "Intent extra was null");
+                    Log.d(LOG, "Intent extra was null");
                 }
             }
         };
@@ -44,21 +45,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
+        File file = new File(getFilesDir(), MyFirebaseMessagingService.FILENAME);
         try {
-            File file = new File(getFilesDir(), MyFirebaseMessagingService.FILENAME);
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = "";
-            while(line!=null){
-                line = reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
                 addMessageToLayout(line);
             }
             reader.close();
-        } catch (Exception e) {}
+        } catch (IOException e) {
+            Log.d(LOG, "Failed to read from file");
+        }
     }
 
-    public void addMessageToLayout(String message){
+    public void addMessageToLayout(String message) {
         TextView textView = new TextView(getApplicationContext());
         textView.setText(message);
         linearLayout.addView(textView);

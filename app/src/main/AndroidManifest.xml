@@ -13,9 +13,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="edu.temple.FCMChat.RECEIVED_MESSAGE" />
-            </intent-filter>
         </activity>
 
         <service
