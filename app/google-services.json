@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "677618690333",
+    "firebase_url": "https://fcmchat-ec9f6.firebaseio.com",
+    "project_id": "fcmchat-ec9f6",
+    "storage_bucket": "fcmchat-ec9f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677618690333:android:4872f8faa97a4974",
+        "android_client_info": {
+          "package_name": "edu.temple.fcmchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677618690333-7unq6q736tqp7usmdf58bdr2lkerkd2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.temple.fcmchat",
+            "certificate_hash": "61a07ee25bfc42aaac5ec57377a242abeabef390"
+          }
+        },
+        {
+          "client_id": "677618690333-etb0i15dorup4kpaj2etslpk9jdnb87k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPRCYrhDGB5sNuq_MjWeIdeJcYMcGJ180"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677618690333-etb0i15dorup4kpaj2etslpk9jdnb87k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
